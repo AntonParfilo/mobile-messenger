@@ -39,7 +39,11 @@ export const Header = observer(()=>{
     useEffect(() => {
         if (!loading) {
             if(data){
-                if (data.checkUser.message === "OK") user.setIfLogin(true);
+                if (data.checkUser.message === "OK"){
+                    user.setIfLogin(true);
+                    user.setUsername(data.checkUser.data.username);
+                    user.setPassword(data.checkUser.data.password)
+                }
                 setLoading(false);
             }
         } else setLoading(true);

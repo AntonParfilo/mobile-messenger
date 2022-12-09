@@ -7,11 +7,22 @@ class user {
 
   users = [
     { username: "null",
-        agent: "null"
+      agent: "null"
     },
   ];
 
   ifLogin = false;
+
+  username = "";
+  password = "";
+
+  setUsername = (newName) => {
+    this.username = newName;
+  }
+
+  setPassword = (newPass) => {
+    this.password = newPass
+    }
 
   setIfLogin = (value)=>{
     this.ifLogin = value;

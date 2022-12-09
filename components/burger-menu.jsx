@@ -1,23 +1,31 @@
 import { observer } from 'mobx-react-lite';
-import React, { useRef, useState } from 'react';
-import { Text, StyleSheet, View, Animated, TextInput, Button } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Text, StyleSheet, View, Animated, TextInput, Button, ScrollView } from 'react-native';
 import burgerMenu from '../store/burger';
 import { Login } from './login';
 import { Registration } from './registration';
 import user from '../store/user';
+import { BurgerHeader } from './burger-header';
+import { UserHello } from './user-hello';
+import { UserCard } from './user-card';
+import { useQuery } from '@apollo/client';
+import query from '../query/queries';
 
 
 export const BurgerMenu = observer(()=>{
+
+  const { loading, error, data } = useQuery(query.getUsers);
 
   const [menuState, setMenuState] = useState(true);
   const fadeAnim = useRef(new Animated.Value(-100)).current;
   let burger = burgerMenu.isOpen;
   let ifLogin = user.ifLogin;
+  let users = user.users;
 
-  const menuUp = () => {
+    const menuUp = () => {
     Animated.timing(fadeAnim, {
       toValue: -1200,
-      duration: 500,
+      duration: 300,
       useNativeDriver: true
     }).start();
   };
@@ -25,19 +33,32 @@ export const BurgerMenu = observer(()=>{
   const MenuDown = () => {
     Animated.timing(fadeAnim, {
       toValue: 0,
-      duration: 500,
+      duration: 300,
       useNativeDriver: true
     }).start();
   };
 
   burger? MenuDown() : menuUp();
   
+  useEffect(() => {
+    if (!loading) {
+      user.setUsers(data.getUsers);
+    }
+  }, [data]);
+
+  const usersView = users.map((el, index)=>{
+      return <UserCard key={index} username = {el.username} agent = {el.agent} />
+  });
 
     return(
         <Animated.View style={[style.burgerWrapper, {transform: [{ translateY:  fadeAnim}]}]}>
-                
-        
-                
+
+          { ifLogin? <UserHello /> :  <BurgerHeader/>}
+          <ScrollView style={style.other}>
+                <Text style={{fontSize: 20, marginBottom: 20, textAlign: "center", width: "100%"}} >Другие участники</Text>
+                {usersView}
+          </ScrollView>
+
         </Animated.View>
     )
 });
@@ -50,7 +71,8 @@ const style = StyleSheet.create({
         height: "100%",
         zIndex: 2,
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "flex-start",
+        paddingTop: 55,
     },
     login:{
       width: "95%",
@@ -68,5 +90,13 @@ const style = StyleSheet.create({
       marginTop: 5,
       width: "100%",
       paddingHorizontal: 15
+    },
+    other: {
+      backgroundColor: "#1C2026",
+      // marginTop: 40,
+      width: "100%",
+      // alignItems: "flex-start",
+      flex: 1,
+      padding: 20
     }
 });

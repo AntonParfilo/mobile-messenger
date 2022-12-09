@@ -17,7 +17,7 @@ export const Registration = () => {
       <TextInput style={style.input}></TextInput>
       <Text>Repeat password</Text>
       <TextInput style={style.input}></TextInput>
-      <Button title="Войти" onPress={() => alert("Simple Button pressed")} />
+      <Button title="Отправить" onPress={() => alert("Simple Button pressed")} />
     </View>
   );
 };
@@ -25,10 +25,11 @@ export const Registration = () => {
 const style = StyleSheet.create({
   reg: {
     width: "95%",
-    backgroundColor: "#1C2026",
+    // backgroundColor: "#1C2026",
     borderRadius: 10,
     padding: 15,
     alignItems: "center",
+    alignSelf: "center"
   },
   input: {
     height: 40,
