@@ -11,8 +11,8 @@ export const UserHello = observer(()=>{
 
     const logout = ()=>{
         user.setIfLogin(false);
-        user.setUsername = "";
-        user.setPassword = "";
+        user.setUsername("");
+        user.setPassword("");
         myDb.deletteUser(); 
     }
 

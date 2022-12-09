@@ -2,10 +2,11 @@ import React from 'react';
 import { View, useWindowDimensions, Text } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import { Login } from './login';
+import { LoginContainer } from './login-container';
 import { Registration } from './registration';
 
 const FirstRoute = () => (
-    <Login/>
+    <LoginContainer />
   );
   
   const SecondRoute = () => (
