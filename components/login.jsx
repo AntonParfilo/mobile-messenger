@@ -1,3 +1,4 @@
+import { ActivityIndicator, Stack } from "@react-native-material/core";
 import React, { useState } from "react";
 import { Text, StyleSheet, View, Animated, TextInput, Button } from 'react-native';
 
@@ -12,8 +13,13 @@ export const Login = (props) => {
       <Text>Login</Text>
       <TextInput style={style.input} onChangeText={el => setLogin(el)} ></TextInput>
       <Text>Password</Text>
-      <TextInput style={style.input} onChangeText={el => setPassword(el)} ></TextInput>
-      <Button title="Войти" onPress={() => props.func(login, password)} />
+      <TextInput secureTextEntry={true} style={style.input} onChangeText={el => setPassword(el)} ></TextInput>
+      { props.loading? 
+        <Stack center style={{ width: 58, height: 58 }}>
+          <ActivityIndicator size="small" color="on-primary" />
+        </Stack> :
+        <Button title="Войти" onPress={() => props.func(login, password)} />
+         } 
     </View>
   );
 };

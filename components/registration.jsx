@@ -1,4 +1,5 @@
-import React from "react";
+import { ActivityIndicator, Stack } from "@react-native-material/core";
+import React, { useState } from "react";
 import {
   Text,
   StyleSheet,
@@ -8,16 +9,26 @@ import {
   Button,
 } from "react-native";
 
-export const Registration = () => {
+export const Registration = (props) => {
+
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [cpassword, setCpassword] = useState("");
+
   return (
     <View style={style.reg}>
       <Text>Login</Text>
-      <TextInput style={style.input}></TextInput>
+      <TextInput style={style.input} onChangeText={el => setLogin(el)} ></TextInput>
       <Text>Password</Text>
-      <TextInput style={style.input}></TextInput>
+      <TextInput style={style.input} onChangeText={el => setPassword(el)} ></TextInput>
       <Text>Repeat password</Text>
-      <TextInput style={style.input}></TextInput>
-      <Button title="Отправить" onPress={() => alert("Simple Button pressed")} />
+      <TextInput style={style.input} onChangeText={el => setCpassword(el)}></TextInput>
+      { props.loading? 
+        <Stack center style={{ width: 58, height: 58 }}>
+          <ActivityIndicator size="small" color="on-primary" />
+        </Stack> :
+        <Button title="Отправить" onPress={() => props.func(login, password, cpassword)} />
+      } 
     </View>
   );
 };

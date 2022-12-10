@@ -8,10 +8,12 @@ import user from '../store/user';
 
 export const LoginContainer = ()=>{
 
+  const [loginState, setLogin] = useState("");
+  const [passwordState, setPassword] = useState("");
 
   const [checkUser, { loading, error, data, refetch, networkStatus }] =
     useLazyQuery(query.checkUser, {
-      variables: { username: "login", password: md5.hex_md5("password") },
+      variables: { username: loginState, password: md5.hex_md5(passwordState) },
       notifyOnNetworkStatusChange: true,
     });
   if (error) {
@@ -19,6 +21,8 @@ export const LoginContainer = ()=>{
   }
 
   const send = (login, password)=>{
+    setLogin(login);
+    setPassword(password);
     if (login.length && password.length) {
       let errorState = "";
       let arr = [
@@ -32,6 +36,7 @@ export const LoginContainer = ()=>{
       });
       if (errorState.length) alert(errorState);
       else {
+        console.log("RESPONSE")
         refetch({ username: login, password: md5.hex_md5(password) });
       }
     }
@@ -39,7 +44,6 @@ export const LoginContainer = ()=>{
   
   useEffect(() => {
     if (data && !loading) {
-        console.log(data)
       if (data.checkUser.message === "OK") {
         myDb.newUser(data.checkUser.data.username, data.checkUser.data.password);
         user.setIfLogin(true);
@@ -48,9 +52,9 @@ export const LoginContainer = ()=>{
       }
       if (data.checkUser.message === "Error") alert("Неправильный логин или пароль");
     }
-  }, [networkStatus]);
+  }, [networkStatus, data]);
 
     return(
-        <Login func={send}/>
+        <Login func={send} loading={loading}/>
     )
 }

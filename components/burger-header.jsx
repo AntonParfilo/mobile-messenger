@@ -4,13 +4,14 @@ import { TabView, SceneMap } from 'react-native-tab-view';
 import { Login } from './login';
 import { LoginContainer } from './login-container';
 import { Registration } from './registration';
+import { RegistrationContainer } from './registration-container';
 
 const FirstRoute = () => (
     <LoginContainer />
   );
   
   const SecondRoute = () => (
-    <Registration/>
+    <RegistrationContainer />
   );
   
   const renderScene = SceneMap({
