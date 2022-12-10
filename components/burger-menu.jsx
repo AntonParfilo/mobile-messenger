@@ -10,6 +10,7 @@ import { UserHello } from './user-hello';
 import { UserCard } from './user-card';
 import { useQuery } from '@apollo/client';
 import query from '../query/queries';
+import { ActivityIndicator, Stack } from '@react-native-material/core';
 
 
 export const BurgerMenu = observer(()=>{
@@ -53,10 +54,20 @@ export const BurgerMenu = observer(()=>{
     return(
         <Animated.View style={[style.burgerWrapper, {transform: [{ translateY:  fadeAnim}]}]}>
 
-          { ifLogin? <UserHello /> :  <BurgerHeader/>}
+          { loading? 
+            <Stack center style={{ width: 128, height: 128, alignSelf: "center" }}>
+              <ActivityIndicator size="large" color="on-primary" />
+            </Stack> :
+            ifLogin? <UserHello /> :  <BurgerHeader/>
+          }
           <ScrollView style={style.other}>
-                <Text style={{fontSize: 20, marginBottom: 20, textAlign: "center", width: "100%"}} >Другие участники</Text>
-                {usersView}
+                <Text style={{fontSize: 20, marginBottom: 20, textAlign: "center", width: "100%", color: "#fff"}} >Другие участники</Text>
+                { loading? 
+                  <Stack center style={{ width: 128, height: 128, alignSelf: "center" }}>
+                    <ActivityIndicator size="large" color="on-primary" />
+                  </Stack> :
+                  usersView
+                }
           </ScrollView>
 
         </Animated.View>
@@ -72,7 +83,7 @@ const style = StyleSheet.create({
         zIndex: 2,
         alignItems: "center",
         justifyContent: "flex-start",
-        paddingTop: 55,
+        paddingTop: 50,
     },
     login:{
       width: "95%",

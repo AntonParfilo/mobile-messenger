@@ -17,15 +17,15 @@ export const Registration = (props) => {
 
   return (
     <View style={style.reg}>
-      <Text>Login</Text>
+      <Text style={{color: "#fff"}}>Login</Text>
       <TextInput style={style.input} onChangeText={el => setLogin(el)} ></TextInput>
-      <Text>Password</Text>
+      <Text style={{color: "#fff"}}>Password</Text>
       <TextInput style={style.input} onChangeText={el => setPassword(el)} ></TextInput>
-      <Text>Repeat password</Text>
+      <Text style={{color: "#fff"}}>Repeat password</Text>
       <TextInput style={style.input} onChangeText={el => setCpassword(el)}></TextInput>
       { props.loading? 
         <Stack center style={{ width: 58, height: 58 }}>
-          <ActivityIndicator size="small" color="on-primary" />
+          <ActivityIndicator size="large" color="on-primary" />
         </Stack> :
         <Button title="Отправить" onPress={() => props.func(login, password, cpassword)} />
       } 
@@ -51,5 +51,6 @@ const style = StyleSheet.create({
     marginTop: 5,
     width: "100%",
     paddingHorizontal: 15,
+    color: "#fff"
   },
 });

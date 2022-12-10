@@ -6,7 +6,7 @@ class store {
   }
 
   messages = [
-    {username: "null", message: "null", date: "null"}
+    {username: "null", message: "null", date: "null"} 
   ];
 
   setMessages = (messages)=>{

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { StyleSheet, Text, View, StatusBar, Image } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { ImageBackground } from "react-native";
 import { Header } from "./components/header";
 import bg from "./images/background.jpg";
@@ -15,6 +15,10 @@ import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
 import { myDb } from "./db/db";
 import { BurgerMenu } from "./components/burger-menu";
+import { Content } from "./components/content/content";
+import { Subscribe } from "./components/content/subscribe";
+import { StatusBar } from "expo-status-bar";
+import * as Device from 'expo-device';
 
 const wsLink = new GraphQLWsLink(
   createClient({
@@ -46,16 +50,18 @@ const client = new ApolloClient({
 });
 
 export default function App() {
+  let userAgent = Device.osName;
   useEffect(() => {
     myDb.dbInit();
   }, []);
   return (
     <ApolloProvider client={client}>
+      <StatusBar hidden={false}/>
       <View style={styles.wrapper}>
-        <StatusBar hidden={true} />
         <ImageBackground source={bg} style={styles.background}>
           <Header />
           <BurgerMenu />
+          <Subscribe component={<Content/>} />
         </ImageBackground>
       </View>
     </ApolloProvider>
@@ -65,6 +71,7 @@ export default function App() {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+    marginTop: 40
   },
   background: {
     flex: 1,

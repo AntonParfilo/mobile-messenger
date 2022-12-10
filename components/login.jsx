@@ -10,13 +10,13 @@ export const Login = (props) => {
 
   return (
     <View style={style.login}>
-      <Text>Login</Text>
+      <Text style={{color: "#fff"}}>Login</Text>
       <TextInput style={style.input} onChangeText={el => setLogin(el)} ></TextInput>
-      <Text>Password</Text>
+      <Text style={{color: "#fff"}}>Password</Text>
       <TextInput secureTextEntry={true} style={style.input} onChangeText={el => setPassword(el)} ></TextInput>
       { props.loading? 
         <Stack center style={{ width: 58, height: 58 }}>
-          <ActivityIndicator size="small" color="on-primary" />
+          <ActivityIndicator size="large" color="on-primary" />
         </Stack> :
         <Button title="Войти" onPress={() => props.func(login, password)} />
          } 
@@ -40,6 +40,7 @@ const style = StyleSheet.create({
       marginBottom: 20,
       marginTop: 5,
       width: "100%",
-      paddingHorizontal: 15
+      paddingHorizontal: 15,
+      color: "#fff"
     }
 });

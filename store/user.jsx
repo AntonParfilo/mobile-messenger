@@ -6,8 +6,8 @@ class user {
   }
 
   users = [
-    { username: "null",
-      agent: "null"
+    { username: "",
+      agent: ""
     },
   ];
 

@@ -6,7 +6,7 @@ export const UserCard = (props)=>{
 
     return(
         <View style={style.userCard}>
-            <IconButton icon={<Avatar label={ props.username } size={60} />} />
+            <IconButton icon={<Avatar label={ props.username } size={60} autoColor />} />
             <Text style={style.username}>{ props.username }</Text>
             <Text style={style.useragent}>({ props.agent })</Text>
         </View>

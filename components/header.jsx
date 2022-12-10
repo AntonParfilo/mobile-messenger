@@ -32,7 +32,6 @@ export const Header = observer(()=>{
     
     useEffect(()=>{
         checkUser();
-        // myDb.deletteUser()
     },[]);
 
     useEffect(() => {
@@ -54,11 +53,12 @@ export const Header = observer(()=>{
     
       return (
         <AppBar
-            style={{ zIndex: 3 }}
+            style={{ zIndex: 3, height: 50, justifyContent: "center" }}
           title="Messenger"
           leading={props => (
             <IconButton
-              icon={props => burger? <Icon name="close" {...props} onPress={()=>{setMenu()}} /> : <Icon name="menu" {...props} onPress={()=>{setMenu()}} />}
+              icon={props => burger? <Icon name="close" {...props} /> : <Icon name="menu" {...props} onPress={()=>{setMenu()}} />}
+              onPress={()=>{setMenu()}}
               {...props}
             />
           )}
@@ -70,8 +70,7 @@ export const Header = observer(()=>{
                     </Stack>
                 ) : (
                     <IconButton
-                        icon={<Avatar label="Anton" size={28} />}
-                        // onPress={() => setLoggedIn(!loggedIn)}
+                        icon={<Avatar label={user.username} autoColor size={28} />}
                         {...props}
                     />
                 )
@@ -87,7 +86,7 @@ export const Header = observer(()=>{
                         title="Login"
                         compact
                         style={{ marginEnd: 4 }}
-                        // onPress={() => setLoggedIn(!loggedIn)}
+                        onPress={() => burgerMenu.setOpen(true)}
                         {...props}
                     />
                 )
