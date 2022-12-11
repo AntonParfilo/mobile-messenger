@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "mobile-messenger",
-    "slug": "mobile-messenger",
+    "slug": "messenger",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,18 +18,25 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ragaban.messenger"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "softwareKeyboardLayoutMode" : "pan"
-      
+      "softwareKeyboardLayoutMode": "pan",
+      "package": "com.ragaban.messenger"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "529d778e-803f-4780-98a7-339654d72325"
+      }
+    },
+    "owner": "ragaban"
   }
 }

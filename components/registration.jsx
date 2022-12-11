@@ -7,6 +7,8 @@ import {
   Animated,
   TextInput,
   Button,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 
 export const Registration = (props) => {
@@ -20,9 +22,9 @@ export const Registration = (props) => {
       <Text style={{color: "#fff"}}>Login</Text>
       <TextInput style={style.input} onChangeText={el => setLogin(el)} ></TextInput>
       <Text style={{color: "#fff"}}>Password</Text>
-      <TextInput style={style.input} onChangeText={el => setPassword(el)} ></TextInput>
+      <TextInput secureTextEntry={true} style={style.input} onChangeText={el => setPassword(el)} ></TextInput>
       <Text style={{color: "#fff"}}>Repeat password</Text>
-      <TextInput style={style.input} onChangeText={el => setCpassword(el)}></TextInput>
+      <TextInput secureTextEntry={true} style={style.input} onChangeText={el => setCpassword(el)}></TextInput>
       { props.loading? 
         <Stack center style={{ width: 58, height: 58 }}>
           <ActivityIndicator size="large" color="on-primary" />
@@ -30,13 +32,13 @@ export const Registration = (props) => {
         <Button title="Отправить" onPress={() => props.func(login, password, cpassword)} />
       } 
     </View>
+    
   );
 };
 
 const style = StyleSheet.create({
   reg: {
     width: "95%",
-    // backgroundColor: "#1C2026",
     borderRadius: 10,
     padding: 15,
     alignItems: "center",

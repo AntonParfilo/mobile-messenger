@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import { ActivityIndicator, Stack, Text } from '@react-native-material/core';
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useRef } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { Keyboard, ScrollView, StyleSheet, View } from 'react-native';
 import query from '../../query/queries';
 import smessages from '../../store/messages';
 import user from '../../store/user';
@@ -10,7 +10,7 @@ import { Message } from './message';
 import { NewMessage } from './new-message';
 
 export const Content = observer(()=>{
-
+ 
   let username = user.username;
   let messages = smessages.messages;
   const { loading, error, data } = useQuery(query.getMessages);

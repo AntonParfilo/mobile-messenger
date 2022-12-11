@@ -11,7 +11,7 @@ export const Message = (props)=>{
         <View style={style.mymessageWrapper}>
             <View style={style.mymessagesBody}>
                 <Text style={style.username}>{props.username}</Text>
-                <Text>{props.message}</Text>
+                <Text style={style.message}>{props.message}</Text>
                 <Text style={style.date}>{props.date}</Text>
             </View>
             <IconButton style={style.icon} icon={<Avatar label={props.username} autoColor size={40} />} />

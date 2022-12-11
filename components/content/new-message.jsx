@@ -2,14 +2,16 @@
 import { useMutation } from '@apollo/client';
 import { ActivityIndicator, Icon, Stack, Text } from '@react-native-material/core';
 import React, { useState } from 'react';
-import { Image, StyleSheet, TouchableHighlight, TextInput, View } from 'react-native';
+import { Image, StyleSheet, TouchableHighlight, TextInput, View, KeyboardAvoidingView } from 'react-native';
 import send from "../../images/send.png";
 import query from '../../query/queries';
 import user from "../../store/user";
+import useKeyboardHeight from 'react-native-use-keyboard-height';
+import * as Device from 'expo-device';
 
 export const NewMessage = ()=>{
-
     const [message, setMessage] = useState("");
+    let kh = useKeyboardHeight();
     const [addMessage, {data, loading, error}] = useMutation(query.addMessage);
     const username = user.username;
     const password = user.password;
@@ -33,12 +35,12 @@ export const NewMessage = ()=>{
     }
 
     return(
-        <View style={ user.ifLogin? {position: "relative"} : {display: "none"}}>
-            <TextInput style={style.newMessage} placeholder="Новое сообщение..." placeholderTextColor="#fff" value={message} onChangeText={ el =>  setMessage(el)}></TextInput>
-            <TouchableHighlight style={{ position: "absolute", top: 10, right: 10 }} onPress={()=> sendMessage()}>
-                    <Image source={send} style={style.send}></Image>
-            </TouchableHighlight>
-        </View>
+            <View style={[user.ifLogin? {position: "relative"} : {display: "none"}, {marginBottom: Device.osName === "iOS" ? kh : 0}]}>
+                <TextInput style={style.newMessage} placeholder="Новое сообщение..." placeholderTextColor="#ccc" value={message} onChangeText={ el =>  setMessage(el)}></TextInput>
+                <TouchableHighlight style={{ position: "absolute", top: 10, right: 10 }} onPress={()=> sendMessage()}>
+                        <Image source={send} style={style.send}></Image>
+                </TouchableHighlight>
+            </View>
     )
 }
 
